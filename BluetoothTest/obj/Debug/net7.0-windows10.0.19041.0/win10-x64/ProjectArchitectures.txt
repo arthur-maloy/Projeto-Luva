@@ -1,1 +1,1 @@
-C:\Users\losan\Desktop\Alura\Entity\BluetoothTest\BluetoothTest.csproj;x64
+C:\Users\rafae\Desktop\Esp-TCC\BluetoothTest\BluetoothTest.csproj;x64

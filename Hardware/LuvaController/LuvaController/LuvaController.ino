@@ -20,6 +20,12 @@ BLECharacteristic customCharacteristic(
   BLECharacteristic::PROPERTY_NOTIFY
 );
 
+BLECharacteristic caracteristicaFlexao1(
+  BLEUUID((uint16_t)0x015), 
+  BLECharacteristic::PROPERTY_READ | 
+  BLECharacteristic::PROPERTY_NOTIFY
+);
+
 /* This function handles the server callbacks */
 bool deviceConnected = false;
 class ServerCallbacks: public BLEServerCallbacks {
@@ -54,6 +60,9 @@ void setup() {
   VariableDescriptor.setValue("Accelerometer X");
   customCharacteristic.addDescriptor(&VariableDescriptor);    
 
+  customService->addCharacteristic(&caracteristicaFlexao1);
+  caracteristicaFlexao1.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
+
   /* Configure Advertising with the Services to be advertised */
   MyServer->getAdvertising()->addServiceUUID(serviceID);
 
@@ -73,13 +82,15 @@ void loop() {
   mpu6050.update();
   // Se pegarmos todas as características do sensor acelerômetro/giroscópio, será necessário 14 bytes (1 byte por característica)
   sensorRead = mpu6050.getGyroX();  //read the value of the potentiometer
-  value = map(sensorRead, 0,4095,0,255); //change the value to a range of 0-255 so that it can fit in a single byte
+  value = map(sensorRead, 0, 4095, 0, 255); //Normaliza os dados para caber em 1 byte
   Serial.println(value);
+
   if (deviceConnected) {
     /* Set the value */
     customCharacteristic.setValue(value);
     //customCharacteristic.setValue(&value);  // This is a value of a single byte
     customCharacteristic.notify();  // Notify the client of a change
   }
+
   delay(50);
 }

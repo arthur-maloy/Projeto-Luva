@@ -17,6 +17,7 @@
           "Microsoft.Maui.Graphics": "7.0.92",
           "Microsoft.Maui.Graphics.Win2D.WinUI.Desktop": "7.0.92",
           "Microsoft.WindowsAppSDK": "1.2.221209.1",
+          "Plugin.BLE": "3.0.0-beta.5",
           "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "7.0.10",
           "runtimepack.Microsoft.Maui.Core.Runtime.win": "7.0.92",
           "runtimepack.Microsoft.Maui.Controls.Runtime.win": "7.0.92",
@@ -791,6 +792,38 @@
           }
         }
       },
+      "CommunityToolkit.Common/7.1.2": {
+        "runtime": {
+          "lib/net5.0/CommunityToolkit.Common.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.2.1"
+          }
+        }
+      },
+      "CommunityToolkit.WinUI/7.1.2": {
+        "dependencies": {
+          "CommunityToolkit.Common": "7.1.2",
+          "Microsoft.WindowsAppSDK": "1.2.221209.1"
+        },
+        "runtime": {
+          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.2.1"
+          }
+        }
+      },
+      "CommunityToolkit.WinUI.Connectivity/7.1.2": {
+        "dependencies": {
+          "CommunityToolkit.WinUI": "7.1.2",
+          "Microsoft.WindowsAppSDK": "1.2.221209.1"
+        },
+        "runtime": {
+          "lib/net5.0-windows10.0.18362/CommunityToolkit.WinUI.Connectivity.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.2.1"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/7.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
@@ -994,6 +1027,17 @@
             "fileVersion": "0.0.0.0"
           }
         }
+      },
+      "Plugin.BLE/3.0.0-beta.5": {
+        "dependencies": {
+          "CommunityToolkit.WinUI.Connectivity": "7.1.2"
+        },
+        "runtime": {
+          "lib/net7.0-windows10.0.19041/Plugin.BLE.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.0.0"
+          }
+        }
       }
     }
   },
@@ -1027,6 +1071,27 @@
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""
+    },
+    "CommunityToolkit.Common/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KnHnukN+Sc26YT98OWYTp8mvaYlLc61lzDh0RrVRNQXm01hZ+iXAjCgKM59vAojqxNVrlbcXj22LYOyXWDItgg==",
+      "path": "communitytoolkit.common/7.1.2",
+      "hashPath": "communitytoolkit.common.7.1.2.nupkg.sha512"
+    },
+    "CommunityToolkit.WinUI/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0O6hCHy+/adJygcROD3r3yA41gRq972i/r6uGUfo8lfEbr/I1YGePTClAh1P9JYT7DdoI2IqeUhX05lq+rwrHg==",
+      "path": "communitytoolkit.winui/7.1.2",
+      "hashPath": "communitytoolkit.winui.7.1.2.nupkg.sha512"
+    },
+    "CommunityToolkit.WinUI.Connectivity/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-50/Ug/0pp2o2IUMxulMf3mGliFZC9qi4eulQSoVHfyFCibzMuj3k+9QSPF54GLAsXfYdwOVBerT/Zau9SON7ZQ==",
+      "path": "communitytoolkit.winui.connectivity/7.1.2",
+      "hashPath": "communitytoolkit.winui.connectivity.7.1.2.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/7.0.0": {
       "type": "package",
@@ -1125,6 +1190,13 @@
       "sha512": "sha512-1Y8KDCmUqytdduubaQhRz6aqaP7YhVSPE/fHeqLMsK3DrV+eBThrqkM6R/8N2lu0mwkNfKSTSAhixrTR72nyWA==",
       "path": "microsoft.windowsappsdk/1.2.221209.1",
       "hashPath": "microsoft.windowsappsdk.1.2.221209.1.nupkg.sha512"
+    },
+    "Plugin.BLE/3.0.0-beta.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LnblVu/awVns1cDyZCHDwg7AB47R+YVlFEBIeesRoGUcPIr66L4Zvano3llB/hAh8LT2AE66ITfkxJn/cOagEA==",
+      "path": "plugin.ble/3.0.0-beta.5",
+      "hashPath": "plugin.ble.3.0.0-beta.5.nupkg.sha512"
     }
   },
   "runtimes": {

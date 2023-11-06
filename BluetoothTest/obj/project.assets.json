@@ -17195,26 +17195,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\losan\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\rafae\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\losan\\Desktop\\Alura\\Entity\\BluetoothTest\\BluetoothTest.csproj",
+      "projectUniqueName": "C:\\Users\\rafae\\Desktop\\Esp-TCC\\BluetoothTest\\BluetoothTest.csproj",
       "projectName": "BluetoothTest",
-      "projectPath": "C:\\Users\\losan\\Desktop\\Alura\\Entity\\BluetoothTest\\BluetoothTest.csproj",
-      "packagesPath": "C:\\Users\\losan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\losan\\Desktop\\Alura\\Entity\\BluetoothTest\\obj\\",
+      "projectPath": "C:\\Users\\rafae\\Desktop\\Esp-TCC\\BluetoothTest\\BluetoothTest.csproj",
+      "packagesPath": "C:\\Users\\rafae\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rafae\\Desktop\\Esp-TCC\\BluetoothTest\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\losan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rafae\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -17225,8 +17223,7 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://pkgs.dev.azure.com/082190005/DevOpsArtifact/_packaging/devopstest/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0-android33.0": {
