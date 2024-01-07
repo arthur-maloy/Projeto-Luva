@@ -73,7 +73,7 @@ void setup() {
   MyServer->getAdvertising()->start();
   Serial.println("Waiting for a Client to connect...");
 
-  Wire.begin(32, 33, 9600);
+  Wire.begin(21, 22, 9600);
   mpu6050.begin();
   //mpu6050.calcGyroOffsets(true); // Use essa linha para calibrar o sensor antes de iniciar o programa.
 }
