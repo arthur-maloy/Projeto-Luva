@@ -7,14 +7,20 @@
 
 MPU6050 mpu6050(Wire);
 
-int sensorRead = 0;
-uint16_t value = 0;  //the set value function only accepts unsigned 8 bit integers
+float sensorReadX = 0;
+float sensorReadY = 0;
+uint16_t value = 0;
 
 /* Define the UUID for our Custom Service */
 #define serviceID BLEUUID((uint16_t)0x1700)
 
-/* Define our custom characteristic along with it's properties */
-BLECharacteristic customCharacteristic(
+BLECharacteristic charAccX(
+  BLEUUID((uint16_t)0x015), 
+  BLECharacteristic::PROPERTY_READ | 
+  BLECharacteristic::PROPERTY_NOTIFY
+);
+
+BLECharacteristic charAccY(
   BLEUUID((uint16_t)0x015), 
   BLECharacteristic::PROPERTY_READ | 
   BLECharacteristic::PROPERTY_NOTIFY
@@ -31,10 +37,12 @@ bool deviceConnected = false;
 class ServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* MyServer) {
       deviceConnected = true;
+      MyServer->startAdvertising();
     };
 
     void onDisconnect(BLEServer* MyServer) {
       deviceConnected = false;
+      MyServer->startAdvertising();
     }
 };
 
@@ -52,16 +60,7 @@ void setup() {
   // Referência: https://btprodspecificationrefs.blob.core.windows.net/assigned-numbers/Assigned%20Number%20Types/Assigned_Numbers.pdf
   BLEService *customService = MyServer->createService(BLEUUID((uint16_t)0x015)); // Sensor
 
-  // Adiciona uma característica ao serviço
-  customService->addCharacteristic(&customCharacteristic);
-  customCharacteristic.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
-
-  BLEDescriptor VariableDescriptor(BLEUUID((uint16_t)0x0541)); //Sensor de movimento
-  VariableDescriptor.setValue("Accelerometer X");
-  customCharacteristic.addDescriptor(&VariableDescriptor);    
-
-  customService->addCharacteristic(&caracteristicaFlexao1);
-  caracteristicaFlexao1.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
+  trataAcelerometro(MyServer, customService);
 
   /* Configure Advertising with the Services to be advertised */
   MyServer->getAdvertising()->addServiceUUID(serviceID);
@@ -78,18 +77,38 @@ void setup() {
   //mpu6050.calcGyroOffsets(true); // Use essa linha para calibrar o sensor antes de iniciar o programa.
 }
 
+void trataAcelerometro(BLEServer *MyServer, BLEService *customService) {
+  // Adiciona uma característica ao serviço
+  customService->addCharacteristic(&charAccX);
+  charAccX.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
+
+  BLEDescriptor VariableDescriptor(BLEUUID((uint16_t)0x0541)); //Sensor de movimento
+  VariableDescriptor.setValue("Accelerometer X");
+  charAccX.addDescriptor(&VariableDescriptor);
+
+  // customService->addCharacteristic(&charAccY);
+  // charAccY.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
+
+  // BLEDescriptor VariableDescriptor1(BLEUUID((uint16_t)0x0541)); //Sensor de movimento
+  // VariableDescriptor.setValue("Accelerometer Y");
+  // charAccY.addDescriptor(&VariableDescriptor1);
+}
+
 void loop() {
   mpu6050.update();
   // Se pegarmos todas as características do sensor acelerômetro/giroscópio, será necessário 14 bytes (1 byte por característica)
-  sensorRead = mpu6050.getGyroX();  //read the value of the potentiometer
-  value = map(sensorRead, 0, 4095, 0, 255); //Normaliza os dados para caber em 1 byte
+  sensorReadX = mpu6050.getAccAngleX();  //read the value of the potentiometer
+  sensorReadY = mpu6050.getAccAngleY();
+  value = map(sensorReadX, 0, 4095, 0, 255); //Normaliza os dados para caber em 1 byte
   Serial.println(value);
 
   if (deviceConnected) {
     /* Set the value */
-    customCharacteristic.setValue(value);
+    charAccX.setValue(sensorReadX);
+    //charAccY.setValue(sensorReadY);
     //customCharacteristic.setValue(&value);  // This is a value of a single byte
-    customCharacteristic.notify();  // Notify the client of a change
+    charAccX.notify();  // Notify the client of a change
+    //charAccY.notify();
   }
 
   delay(50);
