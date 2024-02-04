@@ -54,5 +54,5 @@ void loop()
   Serial.print("sensor 4: "); Serial.println(flexValue4); Serial.print("\t");
   Serial.print("sensor 5: "); Serial.println(flexValue5); Serial.print("\t");
   
-  delay(5000);
+  delay(500);
 } 
