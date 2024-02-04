@@ -7,22 +7,18 @@
 
 MPU6050 mpu6050(Wire);
 
-int sensorRead = 0;
-uint16_t value = 0;  //the set value function only accepts unsigned 8 bit integers
-
 /* Define the UUID for our Custom Service */
 #define serviceID BLEUUID((uint16_t)0x1700)
 
-/* Define our custom characteristic along with it's properties */
-BLECharacteristic customCharacteristic(
-  BLEUUID((uint16_t)0x015), 
-  BLECharacteristic::PROPERTY_READ | 
-  BLECharacteristic::PROPERTY_NOTIFY
-);
+const int flexPin1 = 36; 
+const int flexPin2 = 39; 
+const int flexPin3 = 34;
+const int flexPin4 = 35;
+const int flexPin5 = 32;
+int flexValue1, flexValue2, flexValue3, flexValue4, flexValue5;
 
-BLECharacteristic caracteristicaFlexao1(
-  BLEUUID((uint16_t)0x015), 
-  BLECharacteristic::PROPERTY_READ | 
+BLECharacteristic sensores(
+  BLEUUID((uint16_t)0x015),
   BLECharacteristic::PROPERTY_NOTIFY
 );
 
@@ -31,10 +27,12 @@ bool deviceConnected = false;
 class ServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* MyServer) {
       deviceConnected = true;
+      MyServer->startAdvertising();
     };
 
     void onDisconnect(BLEServer* MyServer) {
       deviceConnected = false;
+      MyServer->startAdvertising();
     }
 };
 
@@ -53,18 +51,12 @@ void setup() {
   BLEService *customService = MyServer->createService(BLEUUID((uint16_t)0x015)); // Sensor
 
   // Adiciona uma característica ao serviço
-  customService->addCharacteristic(&customCharacteristic);
-  customCharacteristic.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
+  customService->addCharacteristic(&sensores);
+  sensores.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
 
   BLEDescriptor VariableDescriptor(BLEUUID((uint16_t)0x0541)); //Sensor de movimento
-  VariableDescriptor.setValue("Accelerometer X");
-  customCharacteristic.addDescriptor(&VariableDescriptor);    
-
-  customService->addCharacteristic(&caracteristicaFlexao1);
-  caracteristicaFlexao1.addDescriptor(new BLE2902());  //Adicionar essa linha apenas se houver a propriedade Notify
-
-  /* Configure Advertising with the Services to be advertised */
-  MyServer->getAdvertising()->addServiceUUID(serviceID);
+  VariableDescriptor.setValue("Sensores Luva");
+  sensores.addDescriptor(&VariableDescriptor);
 
   // Start the service
   customService->start();
@@ -78,18 +70,76 @@ void setup() {
   //mpu6050.calcGyroOffsets(true); // Use essa linha para calibrar o sensor antes de iniciar o programa.
 }
 
-void loop() {
+void atualizaValoresSensores() {
   mpu6050.update();
-  // Se pegarmos todas as características do sensor acelerômetro/giroscópio, será necessário 14 bytes (1 byte por característica)
-  sensorRead = mpu6050.getGyroX();  //read the value of the potentiometer
-  value = map(sensorRead, 0, 4095, 0, 255); //Normaliza os dados para caber em 1 byte
-  Serial.println(value);
+  flexValue1 = analogRead(flexPin1);
+  flexValue2 = analogRead(flexPin2);  
+  flexValue3 = analogRead(flexPin3);
+  flexValue4 = analogRead(flexPin4);
+  flexValue5 = analogRead(flexPin5);
+}
 
+char* trataValor(float valor) {
+  char* aux = (char*)malloc(5); //+1 para o terminador nulo
+  
+  snprintf(aux, 5, "%04d", static_cast<int>(valor));
+
+  return aux;
+}
+
+void liberaMemoria(char* sensorFlex1, char* sensorFlex2, char* sensorFlex3, char* sensorFlex4, 
+                   char* sensorFlex5, char* sensorAccX, char* sensorAccY, char* resultado) {
+    free(sensorFlex1);
+    free(sensorFlex2);
+    free(sensorFlex3);
+    free(sensorFlex4);
+    free(sensorFlex5);
+    free(sensorAccX);
+    free(sensorAccY);
+    free(resultado);
+}
+
+void loop() {  
   if (deviceConnected) {
-    /* Set the value */
-    customCharacteristic.setValue(value);
-    //customCharacteristic.setValue(&value);  // This is a value of a single byte
-    customCharacteristic.notify();  // Notify the client of a change
+    atualizaValoresSensores();
+
+    char* sensorFlex1 = trataValor(flexValue1);
+    char* sensorFlex2 = trataValor(flexValue2);
+    char* sensorFlex3 = trataValor(flexValue3);
+    char* sensorFlex4 = trataValor(flexValue4);
+    char* sensorFlex5 = trataValor(flexValue5);
+    char* sensorAccX = trataValor(mpu6050.getAccAngleX());
+    char* sensorAccY = trataValor(mpu6050.getAccAngleY());
+
+    // Alocando memória para a string resultante
+    char* resultado = (char*)malloc(strlen(sensorFlex1) + strlen(sensorFlex2) + strlen(sensorFlex3) + 
+                                    strlen(sensorFlex4) + strlen(sensorFlex5) + strlen(sensorAccX) + 
+                                    strlen(sensorAccY) + 8);  // +7 para o ponto e vírgula e +1 para terminador nulo
+    
+    // Concatenando as strings
+    strcpy(resultado, sensorFlex1);
+    strcat(resultado, ";");
+    strcat(resultado, sensorFlex2);
+    strcat(resultado, ";");
+    strcat(resultado, sensorFlex3);
+    strcat(resultado, ";");
+    strcat(resultado, sensorFlex4);
+    strcat(resultado, ";");
+    strcat(resultado, sensorFlex5);
+    strcat(resultado, ";");
+    strcat(resultado, sensorAccX);
+    strcat(resultado, ";");
+    strcat(resultado, sensorAccY);
+    strcat(resultado, ";");
+
+    sensores.setValue(resultado);
+    sensores.notify();  // Notifica mudança para o client.
+
+    liberaMemoria(sensorFlex1, sensorFlex2, sensorFlex3, 
+                  sensorFlex4, sensorFlex5, sensorAccX, 
+                  sensorAccY, resultado);
+
+    delay(500);
   }
 
   delay(50);
