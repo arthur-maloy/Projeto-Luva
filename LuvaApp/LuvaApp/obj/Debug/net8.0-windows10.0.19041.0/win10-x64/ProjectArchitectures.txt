@@ -1,0 +1,1 @@
+C:\Users\losan\source\repos\LuvaApp\LuvaApp\LuvaApp.csproj;x64
