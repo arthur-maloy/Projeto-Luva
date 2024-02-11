@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LuvaApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+718e0d1b64dc05adedf684666302782ebca712cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+d8ab442284ecb38ebe7ea3a834de7586300fd286")]
 [assembly: System.Reflection.AssemblyProductAttribute("LuvaApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LuvaApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

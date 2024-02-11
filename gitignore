@@ -10,7 +10,7 @@
 # User-specific files
 *.rsuser
 *.suo
-Software/LuvaApp/LuvaApp/*.user
+/Software/LuvaApp/LuvaApp/*.user
 *.userosscache
 *.sln.docstates
 
@@ -37,7 +37,7 @@ bld/
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
-Software/LuvaApp/.vs/
+/Software/LuvaApp/.vs/*
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -400,8 +400,8 @@ FodyWeavers.xsd
 *.sln.iml
 
 ### XamarinStudio ###
-Software/LuvaApp/LuvaApp/bin/
-Software/LuvaApp/LuvaApp/obj/
+/Software/LuvaApp/LuvaApp/bin/*
+/Software/LuvaApp/LuvaApp/obj/*
 .packages
 
 ### VisualStudio ###
