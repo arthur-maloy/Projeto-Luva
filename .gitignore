@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Software/LuvaApp/LuvaApp/obj
+/Software/LuvaApp/LuvaApp/LuvaApp.csproj.user
+/Software/LuvaApp/.vs
