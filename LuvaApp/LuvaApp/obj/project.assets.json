@@ -33871,11 +33871,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\losan\\source\\repos\\LuvaApp\\LuvaApp\\LuvaApp.csproj",
+      "projectUniqueName": "C:\\Users\\losan\\Desktop\\Programação\\Aulas\\EC9\\Projeto-Luva\\LuvaApp\\LuvaApp\\LuvaApp.csproj",
       "projectName": "LuvaApp",
-      "projectPath": "C:\\Users\\losan\\source\\repos\\LuvaApp\\LuvaApp\\LuvaApp.csproj",
+      "projectPath": "C:\\Users\\losan\\Desktop\\Programação\\Aulas\\EC9\\Projeto-Luva\\LuvaApp\\LuvaApp\\LuvaApp.csproj",
       "packagesPath": "C:\\Users\\losan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\losan\\source\\repos\\LuvaApp\\LuvaApp\\obj\\",
+      "outputPath": "C:\\Users\\losan\\Desktop\\Programação\\Aulas\\EC9\\Projeto-Luva\\LuvaApp\\LuvaApp\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

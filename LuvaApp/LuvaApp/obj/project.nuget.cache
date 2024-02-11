@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GLABsblaiNgVM0BxvsFhPx3646vJjgI4XpYFjFMVs6eYQNnxRBZ4Uxz8PgYoZ2XqjqxW0xX0NsesciZuUBvKAg==",
+  "dgSpecHash": "fmots0+W5HIae/R76+QB9TdBJfYQuyXRf0vxmmwJkfgXPZgtpu2fniUffnMWp7Sw6fekYbJDn9qVdWOi44/POw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\losan\\source\\repos\\LuvaApp\\LuvaApp\\LuvaApp.csproj",
+  "projectFilePath": "C:\\Users\\losan\\Desktop\\Programação\\Aulas\\EC9\\Projeto-Luva\\LuvaApp\\LuvaApp\\LuvaApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\losan\\.nuget\\packages\\communitytoolkit.common\\7.1.2\\communitytoolkit.common.7.1.2.nupkg.sha512",
     "C:\\Users\\losan\\.nuget\\packages\\communitytoolkit.winui\\7.1.2\\communitytoolkit.winui.7.1.2.nupkg.sha512",
