@@ -400,8 +400,12 @@ FodyWeavers.xsd
 *.sln.iml
 
 ### XamarinStudio ###
+/Software/LuvaApp/.vs/*
 /Software/LuvaApp/LuvaApp/bin/*
 /Software/LuvaApp/LuvaApp/obj/*
+LuvaApp/bin/
+LuvaApp/obj/
+LuvaApp/**/*.user
 .packages
 
 ### VisualStudio ###
