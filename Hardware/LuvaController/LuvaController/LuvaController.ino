@@ -87,16 +87,40 @@ char* trataValor(float valor) {
   return aux;
 }
 
+void enviaDados(char* resultado){
+  int index = 0;
+  int indexPacote = 0;
+
+  String dataToSend(resultado);
+
+  while (index < strlen(resultado)) {
+    int remainingLength = strlen(resultado) - index;
+    int chunkSize = min(remainingLength, 19); // Tamanho máximo do pacote BLE é 20 - Caractere inicial de Index
+    char* aux = (char*)malloc(2); //+1 para o terminador nulo
+
+    itoa(indexPacote, aux, 10);
+    String pacoteCompleto = String(aux) + dataToSend.substring(index, index + chunkSize);
+
+    sensores.setValue(pacoteCompleto.c_str());
+    sensores.notify();  // Notifica o cliente
+
+    index += chunkSize;
+    indexPacote++;
+    free(aux);
+    delay(10); // Pequena pausa entre os pacotes
+  }
+}
+
 void liberaMemoria(char* sensorFlex1, char* sensorFlex2, char* sensorFlex3, char* sensorFlex4, 
                    char* sensorFlex5, char* sensorAccX, char* sensorAccY, char* resultado) {
-    free(sensorFlex1);
-    free(sensorFlex2);
-    free(sensorFlex3);
-    free(sensorFlex4);
-    free(sensorFlex5);
-    free(sensorAccX);
-    free(sensorAccY);
-    free(resultado);
+  free(sensorFlex1);
+  free(sensorFlex2);
+  free(sensorFlex3);
+  free(sensorFlex4);
+  free(sensorFlex5);
+  free(sensorAccX);
+  free(sensorAccY);
+  free(resultado);
 }
 
 void loop() {  
@@ -132,8 +156,7 @@ void loop() {
     strcat(resultado, sensorAccY);
     strcat(resultado, ";");
 
-    sensores.setValue(resultado);
-    sensores.notify();  // Notifica mudança para o client.
+    enviaDados(resultado);
 
     liberaMemoria(sensorFlex1, sensorFlex2, sensorFlex3, 
                   sensorFlex4, sensorFlex5, sensorAccX, 
