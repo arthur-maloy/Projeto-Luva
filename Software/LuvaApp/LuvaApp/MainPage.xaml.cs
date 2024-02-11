@@ -1,5 +1,6 @@
 ﻿using LuvaApp.Helpers.BluetoothHelper;
 using LuvaApp.Helpers;
+using LuvaApp.Models;
 
 namespace LuvaApp
 {
@@ -28,7 +29,12 @@ namespace LuvaApp
 
         private void TraduzSinalBtn_Clicked(object sender, EventArgs e)
         {
+            var input = new OnnxInput
+            {
+                Sensores = new float[] { 1646f, -31f, -107f },
+            };
 
+            var test = IAEmbarcadaController.Predicao(input);
         }
     }
 }

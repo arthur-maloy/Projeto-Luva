@@ -45,7 +45,7 @@
                 SemanticProperties.Hint="Get Letter"
                 Clicked="TraduzSinalBtn_Clicked"
                 HorizontalOptions="Fill"
-                IsEnabled="False"/>
+                IsEnabled="True"/>
         </VerticalStackLayout>
     </ScrollView>
 
