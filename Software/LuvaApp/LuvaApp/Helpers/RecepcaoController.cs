@@ -1,4 +1,5 @@
 ﻿using LuvaApp.Helpers.BluetoothHelper;
+using LuvaApp.Models;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using System.Text;
@@ -45,9 +46,12 @@ namespace LuvaApp.Helpers
             await luvaCharacteristic.StartUpdatesAsync();
         }
 
-        public string ObtemUltimoValorRecebido()
+        public SensoresModel ObtemUltimoValorRecebido()
         {
-            return _listaRecepcao.Last();
+            var penultimoValor = _listaRecepcao[_listaRecepcao.Count - 2];
+            var retorno = new SensoresModel(penultimoValor);
+
+            return retorno;
         }
 
         private void ValueUpdatedHandler(object? sender, CharacteristicUpdatedEventArgs e)
