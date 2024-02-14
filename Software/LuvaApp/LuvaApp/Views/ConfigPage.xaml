@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LuvaApp.Views.ConfigPage"             
+             Shell.NavBarIsVisible="False"
+             Title="ConfigPage">
+    <VerticalStackLayout
+        BackgroundColor="#D1F5FD">
+        <HorizontalStackLayout
+            HeightRequest="100"
+            BackgroundColor="Black">
+            <Image
+                Source="engrenagem_branca_media.png"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                WidthRequest="65"
+                HeightRequest="65"
+                Margin="10"/>
+            <Label 
+                Text="Configuração"
+                TextColor="White"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" 
+                FontSize="Header"/>
+        </HorizontalStackLayout>
+        <VerticalStackLayout>
+            <Grid
+                Grid.Row="5"
+                Grid.Column="3"
+                Padding="25, 25, 25, 25"
+                RowDefinitions="*, *, *, *, *"
+                ColumnDefinitions="*, *, *">
+                <Label 
+                    Text="IA Utilizada:"
+                    TextColor="Black"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" 
+                    FontSize="Body"
+                    Grid.Row="0"
+                    Grid.Column="0"/>
+                <Picker
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="5">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Embarcada</x:String>
+                            <x:String>Consulta Online</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label 
+                    Text="Taxa de Atualização:"
+                    TextColor="Black"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" 
+                    FontSize="Body"
+                    Grid.Row="1"
+                    Grid.Column="0"/>
+                <Picker
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="5">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Por Tempo</x:String>
+                            <x:String>Por Botão</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label 
+                    Text="Tempo:"
+                    TextColor="Black"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" 
+                    FontSize="Body"
+                    Grid.Row="2"
+                    Grid.Column="0"/>
+                <Entry
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"
+                    BackgroundColor="White"
+                    Placeholder="500"
+                    Keyboard="Numeric"
+                    Margin="5"
+                    Grid.Row="2"
+                    Grid.Column="1"/>
+                <Label
+                    Text="ms"
+                    TextColor="Black"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" 
+                    FontSize="Body"
+                    Grid.Row="2"
+                    Grid.Column="2"/>
+                <Label 
+                    Text="Transmitir Som:"
+                    TextColor="Black"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" 
+                    FontSize="Body"
+                    Grid.Row="3"
+                    Grid.Column="0"/>
+                <Picker
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Margin="5"
+                    Grid.Row="3"
+                    Grid.Column="1">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Ligado</x:String>
+                            <x:String>Desligado</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label 
+                    Text="Exibir Histórico:"
+                    TextColor="Black"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" 
+                    FontSize="Body"
+                    Grid.Row="4"
+                    Grid.Column="0"/>
+                <Picker
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    WidthRequest="200"
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Margin="5"
+                    Grid.Row="4"
+                    Grid.Column="1">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Ligado</x:String>
+                            <x:String>Desligado</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Grid>
+            <Button
+                Text="Configurar Bluetooth"
+                TextColor="White"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="#004D85"
+                Margin="20"/>
+            <Button
+                Text="Salvar"
+                TextColor="White"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="#004D85"/>            
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
