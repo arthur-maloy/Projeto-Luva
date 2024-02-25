@@ -48,6 +48,8 @@ namespace LuvaApp.Helpers
 
         public SensoresModel ObtemUltimoValorRecebido()
         {
+            sendDataThroughAPI("12,12,12,12,12");
+
             var penultimoValor = _listaRecepcao[_listaRecepcao.Count - 2];
             var retorno = new SensoresModel(penultimoValor);
 
@@ -80,6 +82,35 @@ namespace LuvaApp.Helpers
             }
 
             RemoveValorDaLista();
+        }
+
+        public static async void sendDataThroughAPI(string dados)
+        {
+            string url = "http://127.0.0.1:5000/receiveValues";
+            string jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(dados);
+            StringContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+
+                    HttpResponseMessage response = await client.PostAsync(url, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(responseBody);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Erro: {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                }
+            }
         }
 
         private void RemoveValorDaLista()
